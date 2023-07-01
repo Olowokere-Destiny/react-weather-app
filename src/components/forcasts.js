@@ -6,7 +6,7 @@ import { Today, next, next2, next3 } from "./utilityFunctions";
 import OtherForeCasts from "./OtherForeCasts";
 export default function Forecasts(props) {
   const state = props.state;
-  const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${state.currentCity}&appid=${key}&units=metric`;
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${state.currentCity}&appid=${key}&units=metric`;
   const [data, setData] = useState({
     array: [],
     next1: [],
