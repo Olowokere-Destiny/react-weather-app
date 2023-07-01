@@ -3,10 +3,9 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import SaveLocation from "./components/SaveLocation";
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
+  Routes,
   Route,
-  RouterProvider,
+  BrowserRouter as Router
 } from "react-router-dom";
 import Settings from "./components/settings";
 
@@ -21,21 +20,19 @@ function App() {
   }
   console.log(lsMode);
 
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <>
+  return (
+    <Router basename="react-weather-app">
+      <div className="App">
+        <Routes>
         <Route element={<Navbar />}>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/react-weather-app" element={<Home />} />
           <Route path="savelocation" element={<SaveLocation />} />
           <Route path="settings" element={<Settings />} />
         </Route>
-      </>
-    )
-  );
-  return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
