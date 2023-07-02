@@ -1,6 +1,8 @@
 import { next, next2, next3 } from "./utilityFunctions";
 export default function OtherForeCasts(props) {
   const data = props.data;
+  let lsMode = localStorage.getItem("pref_light");
+
   return (
     <>
       <p className="p-3 text-md font-bold">{next}:</p>
@@ -17,7 +19,7 @@ export default function OtherForeCasts(props) {
                   className="w-12 h-12 block mx-auto"
                   src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
                 />
-                <p className="text-sm text-slate-600">{item.main.temp} °C</p>
+                <p className={`text-sm ${lsMode === "false" && "dark-text"} `}>{item.main.temp} °C</p>
               </div>
             );
           })}
@@ -37,7 +39,7 @@ export default function OtherForeCasts(props) {
                   className="w-12 h-12 block mx-auto"
                   src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
                 />
-                <p className="text-sm text-slate-600">{item.main.temp} °C</p>
+                <p className={`text-sm ${lsMode === "false" && "dark-text"} `}>{item.main.temp} °C</p>
               </div>
             );
         })}
@@ -57,7 +59,7 @@ export default function OtherForeCasts(props) {
                   className="w-12 h-12 block mx-auto"
                   src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
                 />
-                <p className="text-sm text-slate-600">{item.main.temp} °C</p>
+                <p className={`text-sm ${lsMode === "false" && "dark-text"} `}>{item.main.temp} °C</p>
               </div>
             );
           })}
