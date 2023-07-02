@@ -1,21 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { showAlert } from "./utilityFunctions";
 export default function Settings() {
-  let lsMode = localStorage.getItem("pref_light");
   const [mode, setMode] = useState(false);
+  useEffect(()=>{
+    let lsMode = localStorage.getItem("pref_light");
+    lsMode !== null ? setMode(JSON.parse(lsMode)) : setMode(true)
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem("pref_light", JSON.stringify(mode))
+    document.body.style.backgroundColor = mode ? "#fff" : "#000";
+    document.body.style.color = mode ? "#000" : "#fff";
+  }, [mode])
+
   function changeToggle() {
-    setMode(!mode);
-    !mode && localStorage.setItem("pref_light", mode.toString());
-    mode && localStorage.setItem("pref_light", mode.toString());
-    if (lsMode === "true") {
-      document.body.style.color = "white";
-      document.body.style.backgroundColor = "black";
-    } else if (lsMode === "false") {
-      document.body.style.color = "black";
-      document.body.style.backgroundColor = "white";
-    }
+    setMode(!mode)
   }
 
   return (
@@ -27,10 +28,9 @@ export default function Settings() {
           <div className="flex items-center justify-between">
             Toggle darkmode
             <div onClick={changeToggle}>
-              {document.body.style.backgroundColor === "black" && (
-                <FontAwesomeIcon icon={faToggleOn} size="2x" />
-              )}
-              {document.body.style.backgroundColor === "white" && <FontAwesomeIcon icon={faToggleOff} size="2x" />}
+              {mode ? (
+                <FontAwesomeIcon icon={faToggleOff} size="2x" />
+              ) : <FontAwesomeIcon icon={faToggleOn} size="2x" />}
             </div>
           </div>
         </div>
