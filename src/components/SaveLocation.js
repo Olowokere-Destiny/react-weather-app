@@ -62,7 +62,7 @@ export default function SaveLocation() {
       </p>
       <div className="m-10">
         <input
-          className="md:w-1/3 block mx-auto mt-8 rounded-md border-2 border-slate-400 focus:outline-2 focus:outline-blue-500"
+          className="md:w-1/3 block mx-auto mt-8 rounded-md border-2 border-slate-400 focus:outline-2 focus:outline-blue-500 custom"
           name="lData"
           onChange={change}
           value={location.lData}
