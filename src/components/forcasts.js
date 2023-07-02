@@ -65,7 +65,7 @@ export default function Forecasts(props) {
                   className="w-12 h-12 block mx-auto"
                   src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
                 />
-                <p className={`text-sm ${lsMode === "false" && "dark-text"} `}>{item.main.temp} °C</p>
+                <p className="text-sm">{item.main.temp} °C</p>
               </div>
             );
           })}
