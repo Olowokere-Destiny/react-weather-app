@@ -27,13 +27,10 @@ export default function Settings() {
           <div className="flex items-center justify-between">
             Toggle darkmode
             <div onClick={changeToggle}>
-              {lsMode === "true" && (
-                <FontAwesomeIcon icon={faToggleOff} size="2x" />
-              )}
-              {lsMode === "false" && (
+              {document.body.style.backgroundColor === "black" && (
                 <FontAwesomeIcon icon={faToggleOn} size="2x" />
               )}
-              {!lsMode && <FontAwesomeIcon icon={faToggleOff} size="2x" />}
+              {document.body.style.backgroundColor === "white" && <FontAwesomeIcon icon={faToggleOff} size="2x" />}
             </div>
           </div>
         </div>
