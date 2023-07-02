@@ -3,8 +3,8 @@ import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { showAlert } from "./utilityFunctions";
 export default function Settings() {
-  const [mode, setMode] = useState(false);
   let lsMode = localStorage.getItem("pref_light");
+  const [mode, setMode] = useState(false);
   function changeToggle() {
     setMode(!mode);
     !mode && localStorage.setItem("pref_light", mode.toString());

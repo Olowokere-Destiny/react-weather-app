@@ -8,7 +8,7 @@ export default function InfoGrid(props) {
   return (
     <div className="grid grid-cols-2 m-8 gap-4 mx-auto md:w-3/5">
 
-      <div className={`bg-gray-300 p-2 rounded-lg flex justify-evenly gap-x-2 items-center ${lsMode === "false" && "dark-grid"}`}>
+      <div className="border border-blue-500 p-2 rounded-lg flex justify-evenly gap-x-2 items-center">
         <div>
           <span className="text-[1.2rem] text-blue-400"><FontAwesomeIcon icon={faWind} /></span>
         </div>
@@ -18,7 +18,7 @@ export default function InfoGrid(props) {
         </div>
       </div>
 
-      <div className={`bg-gray-300 p-2 rounded-lg flex justify-evenly gap-x-2 items-center ${lsMode === "false" && "dark-grid"}`}>
+      <div className="border border-blue-500 p-2 rounded-lg flex justify-evenly gap-x-2 items-center">
         <div>
           <span className="text-[1.2rem] text-blue-400"><FontAwesomeIcon icon={faDroplet} /></span>
         </div>
@@ -28,7 +28,7 @@ export default function InfoGrid(props) {
         </div>
       </div>
 
-      <div className={`bg-gray-300 p-2 rounded-lg flex justify-evenly gap-x-2 items-center ${lsMode === "false" && "dark-grid"}`}>
+      <div className="border border-blue-500 p-2 rounded-lg flex justify-evenly gap-x-2 items-center">
         <div>
           <span className="text-[1.2rem] text-blue-400"><FontAwesomeIcon icon={faLightbulb} /></span>
         </div>
@@ -38,7 +38,7 @@ export default function InfoGrid(props) {
         </div>
       </div>
 
-      <div className={`bg-gray-300 p-2 rounded-lg flex justify-evenly gap-x-2 items-center ${lsMode === "false" && "dark-grid"}`}>
+      <div className="border border-blue-500 p-2 rounded-lg flex justify-evenly gap-x-2 items-center">
         <div>
           <span className="text-[1.2rem] text-blue-400"><FontAwesomeIcon icon={faCloud} /></span>
         </div>

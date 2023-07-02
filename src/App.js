@@ -14,7 +14,6 @@ function App() {
     document.body.style.color = "black";
     document.body.style.backgroundColor = "white";
   }
-  console.log(lsMode);
 
   return (
     <div className="App">

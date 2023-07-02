@@ -4,7 +4,7 @@ export default function OtherForeCasts(props) {
   let lsMode = localStorage.getItem("pref_light");
 
   return (
-    <>
+    <>z
       <p className="p-3 text-md font-bold">{next}:</p>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left space-x-3 mt-2">
         {data.next1.length > 0 &&

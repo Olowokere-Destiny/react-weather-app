@@ -26,11 +26,6 @@ input {
   color: white !important;
 }
 
-.dark-grid {
-  background-color: black !important;
-  border: 1px solid #3b82f6;
-}
-
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;
