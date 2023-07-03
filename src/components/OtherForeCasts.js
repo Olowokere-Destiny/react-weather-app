@@ -1,7 +1,6 @@
 import { next, next2, next3 } from "./utilityFunctions";
 export default function OtherForeCasts(props) {
   const data = props.data;
-  let lsMode = localStorage.getItem("pref_light");
 
   return (
     <>
