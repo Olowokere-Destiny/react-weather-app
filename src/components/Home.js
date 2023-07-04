@@ -15,6 +15,7 @@ export default function Home() {
     temp: 0,
     currentCity: "",
     city: "",
+    country: "",
     icon: "",
     mainDesc: "",
     description: "",
@@ -40,6 +41,7 @@ export default function Home() {
     !response && setTimeout(()=>{setLoading(false)}, 3000)
     const tempData = data.main.temp;
     const currentCity = data.name;
+    const country = data.sys.country;
     const icon = data.weather[0].icon;
     const mainDesc = data.weather[0].main;
     const desc = data.weather[0].description;
@@ -52,6 +54,7 @@ export default function Home() {
         ...prev,
         temp: tempData,
         currentCity: currentCity,
+        country: country,
         icon: icon,
         mainDesc: mainDesc,
         description: desc,
@@ -111,7 +114,7 @@ export default function Home() {
             {d}
           </p>
           <p className="font-bold text-right text-2xl mt-4 mr-4 bg-blue-600 text-white p-2 rounded-md">
-            {state.currentCity}
+            {state.currentCity} <span className="text-[0.8rem]">{state.country}</span>
           </p>
         </div>
         <h2 className="font-medium mt-6">Today's Overview</h2>
