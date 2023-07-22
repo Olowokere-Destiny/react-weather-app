@@ -3,7 +3,6 @@ import { faWind, faDroplet, faLightbulb, faCloud } from "@fortawesome/free-solid
 
 export default function InfoGrid(props) {
   const state = props.state;
-  let lsMode = localStorage.getItem("pref_light");
 
   return (
     <div className="grid grid-cols-2 m-8 gap-4 mx-auto md:w-3/5">

@@ -38,7 +38,6 @@ export default function Forecasts(props) {
     forecasts();
   }, [state.currentCity]);
 
-  let lsMode = localStorage.getItem("pref_light");
 
 
   return (
