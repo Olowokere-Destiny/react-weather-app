@@ -29,5 +29,6 @@ input {
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;
+    /* color: #353535 */
   }
 }

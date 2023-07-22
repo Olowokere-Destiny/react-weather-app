@@ -7,7 +7,7 @@ export default function TempCard(props) {
       const checkBg = () => {
         const bodyTextColor = window.getComputedStyle(document.body).color;
         const isBodyTextWhite = bodyTextColor === 'rgb(255, 255, 255)';
-        const newBackgroundColor = isBodyTextWhite ? 'bg-[#191919]' : 'bg-white';
+        const newBackgroundColor = isBodyTextWhite ? 'bg-[#353535]' : 'bg-white';
         setBackgroundColor(newBackgroundColor);
       };
       checkBg();
@@ -24,7 +24,8 @@ export default function TempCard(props) {
   return (
     <>
       <div className={`shadow-2xl rounded-lg mx-auto w-3/5 h-[14rem] m-4 md:w-1/2 flex flex-col md:flex-row text-center items-center md:justify-around ${backgroundColor}`}>
-        <div>          <img src={iconUrl} className="block mx-auto h-24 w-24" />
+        <div>          
+          <img src={iconUrl} alt="" className="block mx-auto h-24 w-24" />
         </div>
         <div>
           <h1 className="text-[2rem] font-semibold">{state.temp}°C</h1>
