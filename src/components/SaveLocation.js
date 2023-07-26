@@ -4,17 +4,15 @@ import {
   addSuccess,
   noInternet,
   noValidate,
-  notFound,
 } from "./utilityFunctions";
 export default function SaveLocation() {
   const [location, setLocation] = useState({ lData: "" });
   const [lsLoc, setLoc] = useState("");
-  const [isOk, setOk] = useState(false);
 
   let lsLocation = localStorage.getItem("saved_location");
   useEffect(() => {
     setLoc(lsLocation);
-  }, [location.lData]);
+  }, []);
 
   function change(event) {
     const { name, value } = event.target;
@@ -25,15 +23,13 @@ export default function SaveLocation() {
     const res = fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${location.lData}&appid=${key}&units=metric`
     );
-    setOk(res.ok);
-    console.log(res.ok);
   }
 
   function saveLocation() {
     checkLocation();
     if (!navigator.onLine) {
       noInternet();
-    } else if (location.lData.length < 1 || location.lData === "") {
+    } else if (location.lData.length < 1 || location.lData === "" || location.lData.trim() === "") {
       noValidate();
     } else {
       localStorage.setItem("saved_location", location.lData);
