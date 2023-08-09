@@ -26,6 +26,16 @@ input {
   color: white !important;
 }
 
+.active-dot::after {
+  display: block;
+  content: "";
+  border-radius: 40%;
+  margin: auto;
+  width: 7px;
+  height: 4px;
+  background: #134db8;
+}
+
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;
