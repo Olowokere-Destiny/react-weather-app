@@ -4,6 +4,7 @@ import key from "../key";
 import { useEffect, useState } from "react";
 import { Today, next, next2, next3 } from "./utilityFunctions";
 import OtherForeCasts from "./OtherForeCasts";
+import BeatLoader from "react-spinners/BeatLoader";
 export default function Forecasts(props) {
   const state = props.state;
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${state.currentCity}&appid=${key}&units=metric`;
@@ -52,7 +53,12 @@ export default function Forecasts(props) {
         Today:
       </h2>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left space-x-3">
-        {data.array.length > 0 &&
+        { data.array.length < 1 ? 
+        <div className="w-full text-center overflow-hidden text-[0.8rem]">
+          <BeatLoader color={"#3b82f6"}/>
+        </div>:
+
+          data.array.length > 0 &&
           data.array.map((item, i) => {
             return (
               <div
@@ -63,6 +69,7 @@ export default function Forecasts(props) {
                 <img
                   className="w-12 h-12 block mx-auto"
                   src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+                  alt="weather"
                 />
                 <p className="text-sm">{item.main.temp} °C</p>
               </div>
