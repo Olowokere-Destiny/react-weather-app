@@ -26,21 +26,15 @@ input {
   color: white !important;
 }
 
-/* .active-dot {
-  animation-name: expand;
-  animation-duration: .5s;
-  animation-timing-function: ease-in-out;
-
-} */
 .active-dot::after {
   display: block;
   content: "";
   border-radius: 8px ;
   margin: auto;
   margin-top: 2px;
-  width: 24px;
   height: 4px;
   background: #FFF;
+  bottom: 0;
 }
 
 @media screen and (max-width: 500px) {
