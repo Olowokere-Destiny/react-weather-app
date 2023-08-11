@@ -6,7 +6,7 @@ export default function OtherForeCasts(props) {
   return (
     <>
       <p className="p-3 text-md font-bold">{next}:</p>
-      <div className="overflow-x-auto rounded-xl p-4 flex justify-left space-x-3 mt-2">
+      <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3 mt-2">
         {data.next1.length < 1 ? (
           <div className="w-full text-center overflow-hidden text-[0.8rem]">
             <BeatLoader color={"#3b82f6"} />
@@ -33,7 +33,7 @@ export default function OtherForeCasts(props) {
       </div>
 
       <p className="p-3 text-md font-bold">{next2}:</p>
-      <div className="overflow-x-auto rounded-xl p-4 flex justify-left space-x-3 mt-2">
+      <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3 mt-2">
         {data.next2.length < 1 ? (
           <div className="w-full text-center overflow-hidden text-[0.8rem]">
             <BeatLoader color={"#3b82f6"} />
@@ -60,7 +60,7 @@ export default function OtherForeCasts(props) {
       </div>
 
       <p className="p-3 text-md font-bold">{next3}:</p>
-      <div className="overflow-x-auto rounded-xl p-4 flex justify-left space-x-3 mt-2">
+      <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3 mt-2">
         {data.next3.length < 1 ? (
           <div className="w-full text-center overflow-hidden text-[0.8rem]">
             <BeatLoader color={"#3b82f6"} />

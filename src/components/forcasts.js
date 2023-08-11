@@ -52,7 +52,7 @@ export default function Forecasts(props) {
       <h2 className="p-3 text-md font-bold mt-5">
         Today:
       </h2>
-      <div className="overflow-x-auto rounded-xl p-4 flex justify-left space-x-3">
+      <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3">
         { data.array.length < 1 ? 
         <div className="w-full text-center overflow-hidden text-[0.8rem]">
           <BeatLoader color={"#3b82f6"}/>
@@ -63,7 +63,7 @@ export default function Forecasts(props) {
             return (
               <div
                 key={i}
-                className="rounded-md border-2 border-blue-500 p-3 text-center w-[40%]"
+                className="rounded-md border-2 border-blue-500 p-3 text-center w-[40%] md:w-[7rem]"
               >
                 <p className="font-bold">{item.dt_txt.slice(10, 16)}</p>
                 <img
