@@ -3,20 +3,20 @@ import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { showAlert } from "./utilityFunctions";
 export default function Settings() {
-  const [mode, setMode] = useState(false);
-  useEffect(()=>{
+  const [mode, setMode] = useState(null);
+  useEffect(() => {
     let lsMode = localStorage.getItem("pref_light");
-    lsMode !== null ? setMode(JSON.parse(lsMode)) : setMode(true)
-  }, [])
+    lsMode !== null ? setMode(JSON.parse(lsMode)) : setMode(true);
+  }, []);
 
-  useEffect(()=>{
-    localStorage.setItem("pref_light", JSON.stringify(mode))
+  useEffect(() => {
+    localStorage.setItem("pref_light", JSON.stringify(mode));
     document.body.style.backgroundColor = mode ? "#fff" : "#000";
     document.body.style.color = mode ? "#000" : "#fff";
-  }, [mode])
+  }, [mode]);
 
   function changeToggle() {
-    setMode(!mode)
+    setMode(!mode);
   }
 
   return (
@@ -30,7 +30,9 @@ export default function Settings() {
             <div onClick={changeToggle}>
               {mode ? (
                 <FontAwesomeIcon icon={faToggleOff} size="2x" />
-              ) : <FontAwesomeIcon icon={faToggleOn} size="2x" />}
+              ) : (
+                <FontAwesomeIcon icon={faToggleOn} size="2x" />
+              )}
             </div>
           </div>
         </div>
