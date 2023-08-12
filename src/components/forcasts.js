@@ -19,6 +19,7 @@ export default function Forecasts(props) {
   async function forecasts() {
     let response = await fetch(forecastUrl);
     let dataList = await response.json();
+    console.log(dataList)
     let modArr = dataList.list.filter((item) => {
       return item.dt_txt.includes(Today);
     });
@@ -44,7 +45,7 @@ export default function Forecasts(props) {
   return (
     <div className="mb-20 md:mb-[6rem] md:mx-12">
       <h3 className="text-blue-500 ml-4 font-bold text-md underline">
-        Forcasts
+        Forecasts
         <span className="ml-[4px]">
           <FontAwesomeIcon icon={faArrowRight} />
         </span>
