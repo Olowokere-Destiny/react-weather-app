@@ -37,6 +37,11 @@ input {
   bottom: 0;
 }
 
+.back-btn:active {
+  transition: all .3s;
+  transform: scale(0.9666)
+}
+
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;

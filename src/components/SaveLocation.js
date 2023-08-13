@@ -19,14 +19,7 @@ export default function SaveLocation() {
     setLocation((prev) => ({ ...prev, [name]: value }));
   }
 
-  function checkLocation() {
-    const res = fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location.lData}&appid=${key}&units=metric`
-    );
-  }
-
   function saveLocation() {
-    checkLocation();
     if (!navigator.onLine) {
       noInternet();
     } else if (location.lData.length < 1 || location.lData === "" || location.lData.trim() === "") {

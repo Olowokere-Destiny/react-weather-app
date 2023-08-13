@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import SaveLocation from "./components/SaveLocation";
 import { Routes, Route } from "react-router-dom";
 import Settings from "./components/settings";
+import Error from "./components/Error404";
 
 function App() {
   let lsMode = localStorage.getItem("pref_light");
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="*" element={<Error />} />
         <Route element={<Navbar />}>
           <Route path="/" element={<Home />} />
           <Route path="savelocation" element={<SaveLocation />} />
