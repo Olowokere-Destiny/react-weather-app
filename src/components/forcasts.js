@@ -13,13 +13,13 @@ export default function Forecasts(props) {
     next1: [],
     next2: [],
     next3: [],
-    next4: []
+    next4: [],
   });
 
   async function forecasts() {
     let response = await fetch(forecastUrl);
     let dataList = await response.json();
-    console.log(dataList)
+    console.log(dataList);
     let modArr = dataList.list.filter((item) => {
       return item.dt_txt.includes(Today);
     });
@@ -33,14 +33,18 @@ export default function Forecasts(props) {
       return item.dt_txt.includes(next3);
     });
     setData((prev) => {
-      return { ...prev, array: modArr, next1: modArr2, next2: modArr3, next3: modArr4 };
+      return {
+        ...prev,
+        array: modArr,
+        next1: modArr2,
+        next2: modArr3,
+        next3: modArr4,
+      };
     });
   }
   useEffect(() => {
     forecasts();
   }, [state.currentCity]);
-
-
 
   return (
     <div className="mb-20 md:mb-[6rem] md:mx-12">
@@ -50,15 +54,13 @@ export default function Forecasts(props) {
           <FontAwesomeIcon icon={faArrowRight} />
         </span>
       </h3>
-      <h2 className="p-3 text-md font-bold mt-5">
-        Today:
-      </h2>
+      <h2 className="p-3 text-md font-bold mt-5">Today:</h2>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3">
-        { data.array.length < 1 ? 
-        <div className="w-full text-center overflow-hidden text-[0.8rem]">
-          <BeatLoader color={"#3b82f6"}/>
-        </div>:
-
+        {data.array.length < 1 ? (
+          <div className="w-full text-center overflow-hidden text-[0.8rem]">
+            <BeatLoader color={"#3b82f6"} />
+          </div>
+        ) : (
           data.array.length > 0 &&
           data.array.map((item, i) => {
             return (
@@ -75,7 +77,8 @@ export default function Forecasts(props) {
                 <p className="text-sm">{item.main.temp} °C</p>
               </div>
             );
-          })}
+          })
+        )}
       </div>
       <OtherForeCasts data={data} />
     </div>

@@ -91,7 +91,8 @@ export default function Home() {
 
   function search(event) {
     event.preventDefault();
-    getData(state.city);
+    let trimmed = (state.city).trim();
+    getData(trimmed);
   }
 
   return (
