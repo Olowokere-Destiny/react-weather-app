@@ -10,7 +10,7 @@ export default function Error() {
       <h1 className="text-[2rem] font-bold">Page not found!</h1>
       <img src={errorimg} className="block mx-auto h-[70%]" alt="error" />
       <button
-        // onClick={back}
+        onClick={back}
         className="p-4 rounded-md bg-blue-400 text-center block font-bold text-white back-btn"
       >
         GO BACK

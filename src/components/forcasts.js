@@ -4,7 +4,7 @@ import key from "../key";
 import { useEffect, useState } from "react";
 import { Today, next, next2, next3 } from "./utilityFunctions";
 import OtherForeCasts from "./OtherForeCasts";
-import BeatLoader from "react-spinners/BeatLoader";
+import { InlineSpinner } from "./Spinner";
 export default function Forecasts(props) {
   const state = props.state;
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${state.currentCity}&appid=${key}&units=metric`;
@@ -57,9 +57,7 @@ export default function Forecasts(props) {
       <h2 className="p-3 text-md font-bold mt-5">Today:</h2>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3">
         {data.array.length < 1 ? (
-          <div className="w-full text-center overflow-hidden text-[0.8rem]">
-            <BeatLoader color={"#3b82f6"} />
-          </div>
+          <InlineSpinner />
         ) : (
           data.array.length > 0 &&
           data.array.map((item, i) => {

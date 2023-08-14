@@ -1,5 +1,5 @@
-import BeatLoader from "react-spinners/BeatLoader";
 import { next, next2, next3 } from "./utilityFunctions";
+import { InlineSpinner } from "./Spinner";
 export default function OtherForeCasts(props) {
   const data = props.data;
 
@@ -8,9 +8,7 @@ export default function OtherForeCasts(props) {
       <p className="p-3 text-md font-bold">{next}:</p>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3 mt-2">
         {data.next1.length < 1 ? (
-          <div className="w-full text-center overflow-hidden text-[0.8rem]">
-            <BeatLoader color={"#3b82f6"} />
-          </div>
+          <InlineSpinner />
         ) : (
           data.next1.length > 0 &&
           data.next1.map((item, i) => {
@@ -35,9 +33,7 @@ export default function OtherForeCasts(props) {
       <p className="p-3 text-md font-bold">{next2}:</p>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3 mt-2">
         {data.next2.length < 1 ? (
-          <div className="w-full text-center overflow-hidden text-[0.8rem]">
-            <BeatLoader color={"#3b82f6"} />
-          </div>
+          <InlineSpinner />
         ) : (
           data.next2.length > 0 &&
           data.next2.map((item, i) => {
@@ -62,9 +58,7 @@ export default function OtherForeCasts(props) {
       <p className="p-3 text-md font-bold">{next3}:</p>
       <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3 mt-2">
         {data.next3.length < 1 ? (
-          <div className="w-full text-center overflow-hidden text-[0.8rem]">
-            <BeatLoader color={"#3b82f6"} />
-          </div>
+          <InlineSpinner />
         ) : (
           data.next3.length > 0 &&
           data.next3.map((item, i) => {
