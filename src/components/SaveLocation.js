@@ -4,32 +4,58 @@ import {
   addSuccess,
   noInternet,
   noValidate,
+  notFound,
 } from "./utilityFunctions";
 export default function SaveLocation() {
   const [location, setLocation] = useState({ lData: "" });
   const [lsLoc, setLoc] = useState("");
+  const [okay, setOkay] = useState(null);
 
   let lsLocation = localStorage.getItem("saved_location");
   useEffect(() => {
     setLoc(lsLocation);
-  }, []);
+  }, [lsLocation]);
 
   function change(event) {
     const { name, value } = event.target;
     setLocation((prev) => ({ ...prev, [name]: value }));
   }
 
+  useEffect(() => {
+    if (okay === true) {
+      addSuccess();
+    } else if (okay === false) {
+      notFound();
+    }
+  }, [okay]);
+
+  async function searchLocation() {
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location.lData.trim()}&appid=${key}&units=metric`;
+    const res = await fetch(forecastUrl);
+    const data = await res.json();
+    if (res) {
+      if (res.status === 200 && res.ok === true) {
+        setOkay(true);
+        localStorage.setItem("saved_location", data.city.name);
+        data && setLoc(data.city.name);
+        location.lData = ""
+      } else if (res.status === 404 && res.ok === false) {
+        setOkay(false);
+      }
+    }
+  }
+
   function saveLocation() {
     if (!navigator.onLine) {
       noInternet();
-    } else if (location.lData.length < 1 || location.lData === "" || location.lData.trim() === "") {
+    } else if (
+      location.lData.length < 1 ||
+      location.lData === "" ||
+      location.lData.trim() === ""
+    ) {
       noValidate();
     } else {
-      localStorage.setItem("saved_location", location.lData);
-      addSuccess();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      searchLocation();
     }
   }
 
@@ -39,10 +65,6 @@ export default function SaveLocation() {
       <p>
         Save your current location so that the app loads your location's data by
         default the next time you open the app.
-      </p>
-      <p>
-        If you encounter an error or a blank page on sign in, check your saved
-        location and enter a valid location.
       </p>
       <br />
       <p>Please ensure to enter the name of a valid location.</p>

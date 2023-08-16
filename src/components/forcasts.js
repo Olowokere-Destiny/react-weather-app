@@ -19,7 +19,6 @@ export default function Forecasts(props) {
   async function forecasts() {
     let response = await fetch(forecastUrl);
     let dataList = await response.json();
-    console.log(dataList);
     let modArr = dataList.list.filter((item) => {
       return item.dt_txt.includes(Today);
     });
