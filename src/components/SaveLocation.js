@@ -10,6 +10,7 @@ export default function SaveLocation() {
   const [location, setLocation] = useState({ lData: "" });
   const [lsLoc, setLoc] = useState("");
   const [okay, setOkay] = useState(null);
+  const [fetching, setFetching] = useState(null);
 
   let lsLocation = localStorage.getItem("saved_location");
   useEffect(() => {
@@ -30,12 +31,14 @@ export default function SaveLocation() {
   }, [okay]);
 
   async function searchLocation() {
+    setFetching(true)
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location.lData.trim()}&appid=${key}&units=metric`;
     const res = await fetch(forecastUrl);
     const data = await res.json();
     if (res) {
       if (res.status === 200 && res.ok === true) {
         setOkay(true);
+        setFetching(false)
         localStorage.setItem("saved_location", data.city.name);
         data && setLoc(data.city.name);
         location.lData = ""
@@ -43,6 +46,7 @@ export default function SaveLocation() {
         setOkay(false);
       }
     }
+    setFetching(false)
   }
 
   function saveLocation() {
@@ -79,10 +83,11 @@ export default function SaveLocation() {
           value={location.lData}
         />
         <button
-          className="block mx-auto bg-blue-600 text-white font-semibold mt-6 p-2 rounded-md"
+          className="block mx-auto bg-blue-600 text-white font-semibold mt-6 p-2 rounded-md disabled:bg-stone-700"
           onClick={saveLocation}
+          disabled={fetching}
         >
-          Save Location
+          {fetching ? "Loading" : "Save Location"}
         </button>
       </div>
     </div>
