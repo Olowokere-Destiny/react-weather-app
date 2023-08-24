@@ -17,7 +17,12 @@ export default function Forecasts(props) {
   });
 
   async function forecasts() {
-    let response = await fetch(forecastUrl);
+    let ctrl = new AbortController();
+    let timeout = setTimeout(() => {
+      ctrl.abort();
+    }, 9000);
+    let response = await fetch(forecastUrl, { signal: ctrl.signal });
+    clearTimeout(timeout);
     let dataList = await response.json();
     let modArr = dataList.list.filter((item) => {
       return item.dt_txt.includes(Today);

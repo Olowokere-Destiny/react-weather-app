@@ -6,8 +6,6 @@ import Forecasts from "./forcasts";
 import Spinner from "./Spinner";
 import { noInternet } from "./utilityFunctions";
 export default function Home() {
-  
-
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
 
@@ -22,7 +20,7 @@ export default function Home() {
     wSpeed: 0,
     humidity: 0,
     pressure: 0,
-    visibility: 0
+    visibility: 0,
   });
 
   const d = new Date().toDateString();
@@ -31,14 +29,23 @@ export default function Home() {
   let res;
 
   async function getData(city) {
-    setLoading(true)
+    setLoading(true);
+    const ctrl = new AbortController();
+    const timeoutFn = setTimeout(() => {
+      ctrl.abort();
+    }, 9000);
     res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`,
+      { signal: ctrl.signal }
     );
+    clearTimeout(timeoutFn);
     data = await res.json();
-    setResponse(res.ok)
-    response && setLoading(false)
-    !response && setTimeout(()=>{setLoading(false)}, 3000)
+    setResponse(res.ok);
+    response && setLoading(false);
+    !response &&
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     const tempData = data.main.temp;
     const currentCity = data.name;
     const country = data.sys.country;
@@ -64,22 +71,23 @@ export default function Home() {
         visibility: visibility,
       };
     });
-    setLoading(false)
+    setLoading(false);
   }
-  !navigator.onLine && noInternet()
+  !navigator.onLine && noInternet();
 
-  state.currentCity.length > 1 && sessionStorage.setItem("preserve_search", state.currentCity)
-  let ss = sessionStorage.getItem("preserve_search")
+  state.currentCity.length > 1 &&
+    sessionStorage.setItem("preserve_search", state.currentCity);
+  let ss = sessionStorage.getItem("preserve_search");
   let lc = localStorage.getItem("saved_location");
 
   useEffect(() => {
     if (!ss && !lc) {
-      getData("london")
+      getData("london");
     }
     if (!ss) {
-      getData(lc)
+      getData(lc);
     } else if (ss) {
-      getData(ss)
+      getData(ss);
     }
   }, []);
 
@@ -88,42 +96,43 @@ export default function Home() {
     setState((prev) => ({ ...prev, [name]: value }));
   }
 
-
   function search(event) {
     event.preventDefault();
-    let trimmed = (state.city).trim();
+    let trimmed = state.city.trim();
     getData(trimmed);
   }
 
   return (
     <>
-      {
-        loading ? <Spinner /> :
-      <div className="m-2">
-        <form onSubmit={search}>
-          <input
-            type="search"
-            placeholder="Search..."
-            name="city"
-            value={state.city}
-            onChange={change}
-            className="w-1/2 rounded-md block mx-auto p-2 bg-slate-400 outline-none placeholder:text-white focus:bg-white focus:outline-blue-300"
-          />
-        </form>
-        <div className="flex justify-between items-center">
-          <p className="font-bold text-right text-lg mt-4 mr-4 border-l-4 border-blue-600 pl-1">
-            {d}
-          </p>
-          <p className="font-bold text-right text-2xl mt-4 mr-4 bg-blue-600 text-white p-2 rounded-md">
-            {state.currentCity} <span className="text-[0.8rem]">{state.country}</span>
-          </p>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="m-2">
+          <form onSubmit={search}>
+            <input
+              type="search"
+              placeholder="Search..."
+              name="city"
+              value={state.city}
+              onChange={change}
+              className="w-1/2 rounded-md block mx-auto p-2 bg-slate-400 outline-none placeholder:text-white focus:bg-white focus:outline-blue-300"
+            />
+          </form>
+          <div className="flex justify-between items-center">
+            <p className="font-bold text-right text-lg mt-4 mr-4 border-l-4 border-blue-600 pl-1">
+              {d}
+            </p>
+            <p className="font-bold text-right text-2xl mt-4 mr-4 bg-blue-600 text-white p-2 rounded-md">
+              {state.currentCity}{" "}
+              <span className="text-[0.8rem]">{state.country}</span>
+            </p>
+          </div>
+          <h2 className="font-medium mt-6">Today's Overview</h2>
+          <TempCard state={state} />
+          <InfoGrid state={state} />
+          <Forecasts state={state} />
         </div>
-        <h2 className="font-medium mt-6">Today's Overview</h2>
-        <TempCard state={state} />
-        <InfoGrid state={state} />
-        <Forecasts state={state} />
-      </div>
-      }
+      )}
     </>
   );
 }
