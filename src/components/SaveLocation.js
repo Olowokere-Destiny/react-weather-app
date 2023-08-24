@@ -36,19 +36,25 @@ export default function SaveLocation() {
     let timeout = setTimeout(() => {
       ctrl.abort();
     }, 9000);
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location.lData.trim()}&appid=${key}&units=metric`;
-    const res = await fetch(forecastUrl, { signal: ctrl.signal });
-    clearTimeout(timeout);
-    const data = await res.json();
-    if (res) {
-      if (res.status === 200 && res.ok === true) {
-        setOkay(true);
-        setFetching(false);
-        localStorage.setItem("saved_location", data.city.name);
-        data && setLoc(data.city.name);
-        location.lData = "";
-      } else if (res.status === 404 && res.ok === false) {
-        setOkay(false);
+    try {
+      const forecastUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location.lData.trim()}&appid=${key}&units=metric`;
+      const res = await fetch(forecastUrl, { signal: ctrl.signal });
+      clearTimeout(timeout);
+      const data = await res.json();
+      if (res) {
+        if (res.status === 200 && res.ok === true) {
+          setOkay(true);
+          setFetching(false);
+          localStorage.setItem("saved_location", data.name);
+          data && setLoc(data.name);
+          location.lData = "";
+        } else if (res.status === 404 && res.ok === false) {
+          setOkay(false);
+        }
+      }
+    } catch(error) {
+      if (error.name === "AbortError") {
+        setFetching(false)
       }
     }
     setFetching(false);
