@@ -42,6 +42,10 @@ input {
   transform: scale(0.9666)
 }
 
+.date-container {
+  width: fit-content;
+}
+
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;

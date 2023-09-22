@@ -4,7 +4,8 @@ import key from "../key";
 import { useEffect, useState } from "react";
 import { Today, next, next2, next3 } from "./utilityFunctions";
 import OtherForeCasts from "./OtherForeCasts";
-import { InlineSpinner } from "./Spinner";
+import Carousel from "./Carousel";
+import DateHeader from "./DataHeader";
 export default function Forecasts(props) {
   const state = props.state;
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${state.currentCity}&appid=${key}&units=metric`;
@@ -13,7 +14,6 @@ export default function Forecasts(props) {
     next1: [],
     next2: [],
     next3: [],
-    next4: [],
   });
 
   async function forecasts() {
@@ -52,36 +52,14 @@ export default function Forecasts(props) {
 
   return (
     <div className="mb-20 md:mb-[6rem] md:mx-12">
-      <h3 className="text-blue-500 ml-4 font-bold text-md underline">
+      <h3 className="text-blue-500 ml-4 mb-2 font-bold text-md underline">
         Forecasts
         <span className="ml-[4px]">
           <FontAwesomeIcon icon={faArrowRight} />
         </span>
       </h3>
-      <h2 className="p-3 text-md font-bold mt-5">Today:</h2>
-      <div className="overflow-x-auto rounded-xl p-4 flex justify-left lg:justify-center space-x-3">
-        {data.array.length < 1 ? (
-          <InlineSpinner />
-        ) : (
-          data.array.length > 0 &&
-          data.array.map((item, i) => {
-            return (
-              <div
-                key={i}
-                className="rounded-md border-2 border-blue-500 p-3 text-center w-[40%] md:w-[7rem]"
-              >
-                <p className="font-bold">{item.dt_txt.slice(10, 16)}</p>
-                <img
-                  className="w-12 h-12 block mx-auto"
-                  src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
-                  alt="weather"
-                />
-                <p className="text-sm">{item.main.temp} °C</p>
-              </div>
-            );
-          })
-        )}
-      </div>
+      <DateHeader text={"Today"} />
+      <Carousel data={data.array} />
       <OtherForeCasts data={data} />
     </div>
   );

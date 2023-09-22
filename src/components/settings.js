@@ -1,23 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
 import { showAlert } from "./utilityFunctions";
-export default function Settings() {
-  const [mode, setMode] = useState(null);
-  useEffect(() => {
-    let lsMode = localStorage.getItem("pref_light");
-    lsMode !== null ? setMode(JSON.parse(lsMode)) : setMode(true);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("pref_light", JSON.stringify(mode));
-    document.body.style.backgroundColor = mode ? "#fff" : "#000";
-    document.body.style.color = mode ? "#000" : "#fff";
-  }, [mode]);
-
-  function changeToggle() {
-    setMode(!mode);
-  }
+import { connect } from "react-redux";
+import { bindActionCreators } from "@reduxjs/toolkit";
+import toggleAction from "./reducer/settingsAction";
+function Settings({state, toggle}) {
 
   return (
     <div className="m-4">
@@ -27,8 +14,8 @@ export default function Settings() {
           <h2 className="font-semibold text-lg mt-2">Appearance</h2>
           <div className="flex items-center justify-between">
             Toggle darkmode
-            <div onClick={changeToggle}>
-              {mode ? (
+            <div onClick={toggle} className="cursor-pointer">
+              {state ? (
                 <FontAwesomeIcon icon={faToggleOff} size="2x" />
               ) : (
                 <FontAwesomeIcon icon={faToggleOn} size="2x" />
@@ -54,3 +41,14 @@ export default function Settings() {
     </div>
   );
 }
+function mapStateToProps(state) {
+  return {
+    state: state.mode
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    toggle: toggleAction
+  }, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)
