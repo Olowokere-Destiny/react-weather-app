@@ -35,7 +35,7 @@ export function InlineSpinner() {
     };
   }, [timing]);
   return (
-    <div className="w-full text-center overflow-hidden text-[0.8rem]">
+    <div className="w-full text-center overflow-hidden text-[0.8rem] py-4">
       {timing === 0 ? (
         <p className="font-bold text-[0.85rem]">No data. Try again later</p>
       ) : (

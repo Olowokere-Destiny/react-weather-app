@@ -2,7 +2,7 @@ import { InlineSpinner } from "./Spinner";
 
 export default function Carousel({data}) {
   return (
-    <div className="overflow-x-auto rounded-xl sm:p-4 p-2 flex justify-left lg:justify-center space-x-3">
+    <div className="overflow-x-auto sm:p-4 p-2 flex custom-justify space-x-3">
       {data.length < 1 ? (
         <InlineSpinner />
       ) : (
@@ -11,7 +11,7 @@ export default function Carousel({data}) {
           return (
             <div
               key={i}
-              className="rounded-md border-2 border-blue-500 p-3 text-center w-[40%] md:w-[7rem]"
+              className="rounded-md border-2 border-blue-500 p-3 text-center w-[5rem] md:w-[6rem]"
             >
               <p className="font-bold">{item.dt_txt.slice(10, 16)}</p>
               <img

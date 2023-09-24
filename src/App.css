@@ -46,8 +46,17 @@ input {
   width: fit-content;
 }
 
+.custom-justify {
+  justify-content: left;
+}
+
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;
+  }
+}
+@media screen and (min-width: 700px) {
+  .custom-justify {
+    justify-content: center;
   }
 }
