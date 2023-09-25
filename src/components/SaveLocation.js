@@ -52,9 +52,9 @@ export default function SaveLocation() {
           setOkay(false);
         }
       }
-    } catch(error) {
+    } catch (error) {
       if (error.name === "AbortError") {
-        setFetching(false)
+        setFetching(false);
       }
     }
     setFetching(false);
@@ -87,19 +87,22 @@ export default function SaveLocation() {
         Saved location: <i>{!lsLoc ? "No saved locations yet" : lsLoc}</i>
       </p>
       <div className="m-10">
-        <input
-          className="md:w-1/3 block mx-auto mt-8 rounded-md border-2 border-slate-400 focus:outline-2 focus:outline-blue-500 custom"
-          name="lData"
-          onChange={change}
-          value={location.lData}
-        />
-        <button
-          className="block mx-auto bg-blue-600 text-white font-semibold mt-6 p-2 rounded-md disabled:bg-stone-700"
-          onClick={saveLocation}
-          disabled={fetching}
-        >
-          {fetching ? "Loading" : "Save Location"}
-        </button>
+        <form onSubmit={saveLocation}>
+          <input
+            className="md:w-1/3 block mx-auto mt-8 rounded-md border-2 border-slate-400 focus:outline-2 focus:outline-blue-500 custom"
+            name="lData"
+            onChange={change}
+            value={location.lData}
+          />
+          <button
+            type="submit"
+            className="block mx-auto bg-blue-600 text-white font-semibold mt-6 p-2 rounded-md disabled:bg-stone-700"
+            onClick={saveLocation}
+            disabled={fetching}
+          >
+            {fetching ? "Loading" : "Save Location"}
+          </button>
+        </form>
       </div>
     </div>
   );
