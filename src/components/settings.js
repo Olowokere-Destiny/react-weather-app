@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
 import { showAlert } from "./utilityFunctions";
-import { connect } from "react-redux";
-import { bindActionCreators } from "@reduxjs/toolkit";
-import toggleAction from "./reducer/settingsAction";
-function Settings({state, toggle}) {
-
+import { useDispatch, useSelector } from "react-redux";
+import { changeTheme } from "./reducer/settingsSlice";
+function Settings() {
+  const state = useSelector(state => state.settings.mode)
+  const toggle = useDispatch();
   return (
     <div className="m-4">
       <h1 className="text-3xl text-center font-bold underline">Settings</h1>
@@ -14,7 +14,7 @@ function Settings({state, toggle}) {
           <h2 className="font-semibold text-lg mt-2">Appearance</h2>
           <div className="flex items-center justify-between">
             Toggle darkmode
-            <div onClick={toggle} className="cursor-pointer">
+            <div onClick={()=>{toggle(changeTheme())}} className="cursor-pointer">
               {state ? (
                 <FontAwesomeIcon icon={faToggleOff} size="2x" />
               ) : (
@@ -41,14 +41,5 @@ function Settings({state, toggle}) {
     </div>
   );
 }
-function mapStateToProps(state) {
-  return {
-    state: state.mode
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    toggle: toggleAction
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Settings)
+
+export default Settings;

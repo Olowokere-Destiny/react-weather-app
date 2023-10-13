@@ -5,15 +5,14 @@ import SaveLocation from "./components/SaveLocation";
 import { Routes, Route } from "react-router-dom";
 import Settings from "./components/settings";
 import Error from "./components/Error404";
-import { bindActionCreators } from "@reduxjs/toolkit";
-import toggleAction from "./components/reducer/settingsAction";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-function App({state}) {
+function App() {
+  const state = useSelector(state => state.settings.mode);
+  setLs(JSON.stringify(state));
   function setLs(mode) {
     localStorage.setItem("pref_light", mode);
   }
-  setLs(JSON.stringify(state));
   if (state) {
     document.body.style.background = "#FFF";
     document.body.style.color = "#000";
@@ -35,14 +34,4 @@ function App({state}) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    state: state.mode
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    toggle: toggleAction
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App;
