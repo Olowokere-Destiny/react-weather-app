@@ -46,6 +46,14 @@ input {
   width: fit-content;
 }
 
+.try-again {
+  text-decoration: underline 1.7px solid #60A5FA;
+}
+
+.try-again:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 500px) {
   input.custom {
     width: 130px !important;

@@ -12,10 +12,15 @@ export default function Spinner() {
       clearInterval(interv);
     };
   }, [timing]);
+
+  function reload() {
+    window.location.reload();
+  }
+  
   return (
     <div className="text-center h-screen flex items-center justify-center">
       {timing === 0 ? (
-          <p className="font-bold text-[1rem]">No data. Try again</p>
+          <p className="font-bold text-[1rem]">No data. <span className="try-again" onClick={reload}>Try again</span></p>
           ) : (
           <BeatLoader color={"#3b82f6"} />
       )}

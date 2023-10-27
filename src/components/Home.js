@@ -4,11 +4,10 @@ import key from "../key";
 import InfoGrid from "./infoGrid";
 import Forecasts from "./forcasts";
 import Spinner from "./Spinner";
-import { noInternet, notFound } from "./utilityFunctions";
+import { noInternet } from "./utilityFunctions";
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
-  const [okay, setOkay] = useState(null);
 
   const [state, setState] = useState({
     temp: 0,
@@ -41,11 +40,7 @@ export default function Home() {
     );
     clearTimeout(timeoutFn);
     data = await res.json();
-    console.log(res)
     setResponse(res.ok);
-    if (res.statusText === "Not Found" && res.ok === false) {
-      setOkay(false)
-    }
     response && setLoading(false);
     !response &&
       setTimeout(() => {
@@ -84,14 +79,6 @@ export default function Home() {
     sessionStorage.setItem("preserve_search", state.currentCity);
   let ss = sessionStorage.getItem("preserve_search");
   let lc = localStorage.getItem("saved_location");
-
-  // Displaying notification on whether request is successful or not
-
-  useEffect(() => {
-    if (okay === false) {
-      notFound();
-    }
-  }, [okay]);
 
   useEffect(() => {
     if (!ss && !lc) {

@@ -11,6 +11,7 @@ export default function SaveLocation() {
   const [lsLoc, setLoc] = useState("");
   const [okay, setOkay] = useState(null);
   const [fetching, setFetching] = useState(null);
+  const [triggerEffect, setTriggerEffect] = useState(0);
 
   let lsLocation = localStorage.getItem("saved_location");
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function SaveLocation() {
     } else if (okay === false) {
       notFound();
     }
-  }, [okay]);
+  }, [okay, triggerEffect]);
 
   async function searchLocation() {
     setFetching(true);
@@ -67,11 +68,13 @@ export default function SaveLocation() {
       location.lData.length < 1 ||
       location.lData === "" ||
       location.lData.trim() === ""
-    ) {
-      noValidate();
-    } else {
-      searchLocation();
-    }
+      ) {
+        noValidate();
+      } else {
+        searchLocation();
+      }
+      console.log(okay)
+      setTriggerEffect(prev => prev + 1)
   }
 
   return (
